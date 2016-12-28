@@ -1,0 +1,134 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+//** Global textual link color.
+$link-color:            #aaa !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      #444 !default;
+//** Link hover decoration.
+$link-hover-decoration: none !default;
+
+
+//** Global color for active items (e.g., navs or dropdowns).
+$component-active-color:    #444 !default;
+//** Global background color for active items (e.g., navs or dropdowns).
+$component-active-bg:       #fff !default;
+
+// Tabs
+$nav-tabs-active-link-hover-bg:             #fff !default;
+$nav-tabs-active-link-hover-color:          #444 !default;
+$nav-tabs-active-link-hover-border-color:   #fff !default;
+
+
+// //== Pills
+$nav-pills-border-radius:                   6px  !default;
+$nav-pills-active-link-hover-bg:            #fff !default;
+$nav-pills-active-link-hover-color:         #444 !default;
+
+//buttons
+$btn-default-color:              #444 !default;
+$btn-default-bg:                 #e7e7e7 !default;
+$btn-default-border:             #ccc !default;
+@import "bootstrap-sprockets";
+@import "bootstrap";
+  a:focus{outline: none;}
+  #main_menu{
+    li{
+      font: 18px/24px times serif regular;
+      margin-left: 6px;
+      a{
+        padding: 10px 10px;
+      }
+    }
+  }
+
+
+  .header-container{
+    background:transparent url('bg.png') center center repeat;;
+    #header{
+      .container{
+        .row{
+          margin-bottom: 20px;
+          .col-sm-4{
+            img{
+              padding-top: 50px;
+            }
+            ul{
+              padding-top: 50px;
+            }
+            #cart_block_wrapper{
+              background: url('ticket-bas') center bottom no-repeat;
+              padding-bottom: 28px;
+              width: 309px;
+              #cart_block{
+                background: url('ticket-repeat.png')  repeat-y;
+                padding-left: 25px;
+                padding-top: 30px;
+                #cart_block_summary{
+                  background: url('stabilo.png') left top no-repeat;
+                  color: #b35860;
+                  padding-left: 30px;
+                  span.ajax_cart_quantity{
+                    font-size: 45px;
+                    left: 40px;
+                    line-height: 45px;
+                    position: absolute;
+                    top: 30px;
+                  }
+                  span.ajax_cart_product_txt, a.my_cart{
+                    font-size: 17px;
+                    line-height: 17px;
+                  }
+                  a.my_cart{
+                    color: #cb796c;
+                    text-decoration: underline;
+                    &:hover{color: #b35860;}
+                  }
+                  #free_delivery{
+
+                  }
+                }
+              }
+            }
+          }
+        }
+        nav#categories_block_top
+        {
+          ul{
+            border-style: none;
+            li{
+              margin-bottom: 0;
+              margin-left: 15px;
+              a{
+                background: #e7e7e7;
+                font-size: 24px;
+                font-style: italic;
+                line-height: 24px;
+              }
+              &.active a{background: #fff;}
+            }
+          }
+        }
+      }
+    }
+  }
+  .columns-container{
+    background:transparent url('bg2.png') center center repeat;
+  }
+  .footer-container{
+    background:transparent url('bg.png') center center repeat;
+  }

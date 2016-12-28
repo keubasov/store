@@ -1,0 +1,48 @@
+= form_for @product, class: 'form-horifontal', role: 'form' do |f|
+  - if @product.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+      ul
+        - @product.errors.full_messages.each do |message|
+          li = message
+  .form-group.row
+    = f.label :name, 'Наименование:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.text_field :name, class: 'form-control', required: true
+
+  .form-group.row.
+    = f.label :image, 'Изображение:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-2
+      label.btn.btn-default
+        = f.file_field :image, multiple: true, accept: 'image/png,image/gif,image/jpeg'
+        |Загрузить..
+    #images.col-sm-5
+
+  .form-group.row
+    = f.label :quantity, 'Количество:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.number_field :quantity, class: 'form-control', required: true
+
+  .form-group.row
+    = f.label :price, 'Цена:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.number_field :price, min: 50, max: 10000, step: 50, class: 'form-control', required: true
+
+  .form-group.row
+    = f.label :b_material, 'Вид товара:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.select :product_type, Product.product_types_for_select,{include_blank: false},  class: 'form-control'
+
+  .form-group.row#b_material
+    = f.label :b_material, 'Материал:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.select :b_material, Product.b_materials_for_select,{include_blank: false},  class: 'form-control'
+
+  .form-group.row#b_size
+    = f.label :b_size, 'Размер:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.select :b_size, Product.b_sizes_for_select,{include_blank: false},  class: 'form-control'
+
+  .form-group.row
+    .col-sm-2.col-sm-offset-6
+       = f.submit 'Добавить', class: 'btn btn-default'

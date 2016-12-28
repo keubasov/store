@@ -1,0 +1,53 @@
+doctype html
+html
+  head
+    title Store
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    #page
+      .header-container.hidden-xs.hidden-sm
+        header#header
+          .container
+            .row
+              .col-sm-4
+                =image_tag 'logo_main.png'
+              .col-sm-4
+                ul#main_menu.nav.nav-pills
+                  li.active
+                    =link_to 'Каталог', '#', 'data-toggle'=> 'pill'
+                  li
+                    =link_to 'Доставка', '#', 'data-toggle'=> 'pill'
+                  li
+                    =link_to 'О нас', '#', 'data-toggle'=> 'pill'
+              .col-sm-4
+                #cart_block_wrapper
+                  #cart_block
+
+                    #cart_block_summary.collapsed
+                      span.ajax_cart_quantity 0
+                      span.ajax_cart_product_txt товаров в
+                      =<link_to 'моей корзине', root_path, class: 'my_cart'
+                      #free_delivery
+                        span.delivery Бесплатная доставка от
+                          <span class="delivery_from"> 4000 </span>
+                          руб.
+                        span.delivery_ok.hidden Доставим бесплатно!!!!
+                    #cart_block_list
+            nav#categories_block_top
+              ul.nav.nav-tabs
+                li#child.active
+                  =link_to 'Детское', '#', 'data-toggle'=> 'tab'
+                li#unbleached_calico
+                  =link_to 'Бязь', '#', 'data-toggle'=> 'tab'
+                li#poplin
+                  =link_to 'Поплин', '#', 'data-toggle'=> 'tab'
+                li#satin
+                  =link_to 'Сатин', '#', 'data-toggle'=> 'tab'
+      #mobile_nav.hidden-md.hidden-lg
+
+      .columns-container
+        =yield
+      .footer-container
+        h1 footer

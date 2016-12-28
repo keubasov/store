@@ -1,0 +1,39 @@
+#main-content
+  .content-header.row
+    .col-sm-8
+      h1 Товары
+    .col-sm-4
+      = link_to 'Новый товар', new_product_path, class: 'btn btn-default offset'
+  #search-panel.row
+    .col-sm-4.col-sm-offset-4
+      =form_tag('/search', method: :get, remote: true, class: 'input-group', id:'search_form') do
+        span.input-group-btn
+          =submit_tag 'Найти', class: 'btn btn-default'
+        =text_field_tag 'search', nil, placeholder: 'Поиск', class: 'form-control', required: true
+      / -end
+    .col-sm-4
+  #products-table.row
+    table.table.table-striped
+      thead
+        tr
+          th Наимен
+          th Изобр
+          th Размер
+          th Мат-л
+          th Кол-во
+          th Цена
+          th
+          th
+          th
+      tbody
+        -@products.each do |product|
+          tr
+            td = @product.name
+            td = image_tag @product.image
+            td = @product.size
+            td = @product.b_material
+            td = @product.quantity
+            td = @product.price
+            td = link_to "<span class = 'glyphicon glyphicon-eye-open' ></span>".html_safe, product
+            td = link_to "<span class = 'glyphicon glyphicon-pencil' ></span>".html_safe, edit_product_path(product)
+            td = link_to "<span class = 'glyphicon glyphicon-trash' ></span>".html_safe, product, data: { confirm: 'Are you sure?' }, method: :delete

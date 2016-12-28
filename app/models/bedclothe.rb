@@ -1,0 +1,2 @@
+class Bedclothe < Product
+end
