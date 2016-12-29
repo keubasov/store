@@ -9,7 +9,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.money                 :price,         null: false
       t.string                :name,          null: false
       t.text                  :description
-      t.string                :image
+      #t.string                :image
       t.timestamps
     end
     add_column :products,  :product_type, :product_types, null: false, default: :bedclothe, index: true

@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+
+  has_many :product_images, dependent: :destroy
+
   # enum product_types: {
   #   bedclothe:    'bedclothe',
   #   blanket:      'blanket',

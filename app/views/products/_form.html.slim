@@ -1,4 +1,4 @@
-= form_for @product, class: 'form-horifontal', role: 'form' do |f|
+= form_for @product, html: {class: 'form-horifontal', multipart: true, role: 'form'} do |f|
   - if @product.errors.any?
     #error_explanation
       h2 = "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
@@ -11,10 +11,10 @@
       = f.text_field :name, class: 'form-control', required: true
 
   .form-group.row.
-    = f.label :image, 'Изображение:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    = label_tag 'product_images[]', 'Изображение:', class: 'col-sm-2 col-sm-offset-2 control-label'
     .col-sm-2
       label.btn.btn-default
-        = f.file_field :image, multiple: true, accept: 'image/png,image/gif,image/jpeg'
+        = file_field_tag 'product_images[]', multiple: true, accept: 'image/png,image/gif,image/jpeg'
         |Загрузить..
     #images.col-sm-5
 
@@ -29,7 +29,7 @@
       = f.number_field :price, min: 50, max: 10000, step: 50, class: 'form-control', required: true
 
   .form-group.row
-    = f.label :b_material, 'Вид товара:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    = f.label :product_type, 'Вид товара:', class: 'col-sm-2 col-sm-offset-2 control-label'
     .col-sm-3
       = f.select :product_type, Product.product_types_for_select,{include_blank: false},  class: 'form-control'
 
@@ -42,6 +42,11 @@
     = f.label :b_size, 'Размер:', class: 'col-sm-2 col-sm-offset-2 control-label'
     .col-sm-3
       = f.select :b_size, Product.b_sizes_for_select,{include_blank: false},  class: 'form-control'
+
+  .form-group.row
+    = f.label :description, 'Описание:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.text_area :description, class: 'form-control'
 
   .form-group.row
     .col-sm-2.col-sm-offset-6

@@ -28,6 +28,12 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        if params[:product_images]
+          byebug
+          params[:product_images].each do |image|
+            @product.product_images.create(image: image)
+          end
+        end
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -69,6 +75,7 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.fetch(:product, {})
+      params.require(:product).permit(:product_type, :name, :quantity, :price, \
+        :description, :b_size, :b_material)
     end
 end

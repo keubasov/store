@@ -20,7 +20,18 @@
     }
   }
 }
-#product_image{
+#product_images_{
   display: none;
 }
-
+#images{
+  border: 1px dotted green;
+  border-radius: 6px;
+  min-height: 34px;
+  width: auto;
+}
+.page_head{
+  margin-bottom: 30px;
+  margin-top: 0;
+  padding-top: 30px;
+  text-align: center;
+}

@@ -1,6 +1,7 @@
 $(document).on 'turbolinks:load', ()->
 #Предпросмотр картинок, загружаемых в product.new
-  $('#product_image').change (e)->
+  $('#product_images_').change (e)->
+    $('#images').empty()
     for file in this.files
       img = $('<img/>').attr({alt: file.name, class: '.col-sm-1', height: '34'})
       img.file = file
@@ -26,7 +27,7 @@ $(document).on 'turbolinks:load', ()->
   $('#product_product_type').on('change', bedclothe_toggle_fields)
 
 #Сохраняем значение полей формы при перезагрузке страницы
-  $(window).beforeunload ()->
+  $(window).unload ()->
     target_fields = $('form input, select :visible').not("[type='submit']")
     for tf in target_fields
       sessionStorage.setItem(tf.id, tf.val())
