@@ -17,23 +17,27 @@
       thead
         tr
           th Наимен
+          th Вид
           th Изобр
           th Размер
           th Мат-л
           th Кол-во
           th Цена
+          th Описание
           th
           th
           th
       tbody
         -@products.each do |product|
           tr
-            td = @product.name
-            td = image_tag @product.image
-            td = @product.size
-            td = @product.b_material
-            td = @product.quantity
-            td = @product.price
+            td = product.name
+            td = t(product.product_type)
+            td = image_tag product.product_images[0].image.url(:thumb)
+            td = t(product.b_size)
+            td = t(product.b_material)
+            td = product.quantity
+            td = product.price
+            td = product.description
             td = link_to "<span class = 'glyphicon glyphicon-eye-open' ></span>".html_safe, product
             td = link_to "<span class = 'glyphicon glyphicon-pencil' ></span>".html_safe, edit_product_path(product)
             td = link_to "<span class = 'glyphicon glyphicon-trash' ></span>".html_safe, product, data: { confirm: 'Are you sure?' }, method: :delete

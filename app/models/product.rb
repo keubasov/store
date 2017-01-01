@@ -1,4 +1,25 @@
 class Product < ApplicationRecord
+  validates :quantity,
+  # presenсe: true,
+
+            numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :price,
+  # presenсe: true,
+   numericality: {greater_than_or_equal_to: 0}
+  validates :name,
+  # presenсe: true,
+   uniqueness: true, length: {in: 3..40}
+  validates :product_type,
+  # presence: true,
+            inclusion: {in: %w(bedclothe blanket pillow towel matress), message: 'Недопустимый вид товара'}
+  with_options if: "product_type == 'bedclothe'" do |bc|
+    # bc.validates :b_size, presenсe: true
+    # bc.validates :b_material, presenсe: true
+  end
+  validates :b_size, inclusion: {in: %w(one_half two two_euro euro family)}
+  validates :b_material, inclusion: {in: %w(unbleached_calico poplin sateen)}
+
+
 
   has_many :product_images, dependent: :destroy
 

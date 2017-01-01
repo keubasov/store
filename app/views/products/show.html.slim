@@ -1,6 +1,49 @@
 p#notice = notice
 
 
-= link_to 'Edit', edit_product_path(@product)
-'|
-= link_to 'Back', products_path
+ul.list-group
+  li.list-group-item
+    strong Название
+    span.pull-right
+      b
+        = @product.name
+  li.list-group-item
+    strong Вид
+    span.pull-right
+      b
+        = t(@product.product_type)
+  li.list-group-item#list_image
+    strong Изображения
+    .pull-right
+      -@product.product_images.each do|p_i|
+        = image_tag p_i.image.url(:medium)
+    .clearboth
+  li.list-group-item
+    strong Размер
+    span.pull-right
+      b
+        = t(@product.b_size)
+  li.list-group-item
+    strong Материал
+    span.pull-right
+      b
+        = t(@product.b_material)
+  li.list-group-item
+    strong Количество
+    span.pull-right
+      b
+        = @product.quantity
+  li.list-group-item
+    strong Цена
+    span.pull-right
+      b
+        = @product.price
+  li.list-group-item
+    strong Описание
+    span.pull-right
+      b
+        = @product.description
+
+= link_to 'Изменить', edit_product_path(@product), class: 'bot_links'
+br
+= link_to 'Список товаров', products_path, class: 'bot_links'

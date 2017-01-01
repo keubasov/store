@@ -4,8 +4,11 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+logo:
+  product: bedcl
+  image_file_name: avatar92.jpg
+  image_content_type: image/jpeg
+  image_file_size: 3135
+  image_updated_at: <%= Date.new(2016-12-30) %>
+
+

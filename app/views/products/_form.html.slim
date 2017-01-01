@@ -10,13 +10,16 @@
     .col-sm-3
       = f.text_field :name, class: 'form-control', required: true
 
-  .form-group.row.
+  .form-group.row
     = label_tag 'product_images[]', 'Изображение:', class: 'col-sm-2 col-sm-offset-2 control-label'
     .col-sm-2
       label.btn.btn-default
         = file_field_tag 'product_images[]', multiple: true, accept: 'image/png,image/gif,image/jpeg'
         |Загрузить..
     #images.col-sm-5
+      - if controller_name == 'update'
+        - @product.product_images.each do|p_i|
+          = image_tag p_i.image.url(:medium)
 
   .form-group.row
     = f.label :quantity, 'Количество:', class: 'col-sm-2 col-sm-offset-2 control-label'
@@ -50,4 +53,4 @@
 
   .form-group.row
     .col-sm-2.col-sm-offset-6
-       = f.submit 'Добавить', class: 'btn btn-default'
+       = f.submit 'Сохранить', class: 'btn btn-default'
