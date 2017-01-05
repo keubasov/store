@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  before_action :delete_images, only:[:destroy]
   # GET /products
   # GET /products.json
   def index
@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.update(product_params)
         if params[:product_images]
-          @product.product_images.delete_all
+          @product.product_images.each {|i| i.delete_with_file}
           params[:product_images].each do |image|
             @product.product_images.create(image: image)
           end
@@ -77,9 +77,21 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
+    def delete_images
+      begin
+        @product.product_images.each do |p_i|
+          File.delete(p_i.image.options[:path]+p_i.image_file_name)
+        end
+      rescue
+        logger.debug 'Не удалось удалить изображение'
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:product_type, :name, :quantity, :price, \
-        :description, :b_size, :b_material)
+      params.require(:product).permit(:product_type,  :quantity, :price, :b_size, :b_material)
     end
 end
+
+
+
+

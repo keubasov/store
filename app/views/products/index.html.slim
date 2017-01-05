@@ -1,17 +1,7 @@
-#main-content
-  .content-header.row
-    .col-sm-8
-      h1 Товары
-    .col-sm-4
-      = link_to 'Новый товар', new_product_path, class: 'btn btn-default offset'
-  #search-panel.row
-    .col-sm-4.col-sm-offset-4
-      =form_tag('/search', method: :get, remote: true, class: 'input-group', id:'search_form') do
-        span.input-group-btn
-          =submit_tag 'Найти', class: 'btn btn-default'
-        =text_field_tag 'search', nil, placeholder: 'Поиск', class: 'form-control', required: true
-      / -end
-    .col-sm-4
+  =form_tag('/search', method: :get, remote: true, class: 'input-group', id:'search_form') do
+    span.input-group-btn
+      =submit_tag 'Найти', class: 'btn btn-default'
+    =text_field_tag 'search', nil, placeholder: 'Поиск', class: 'form-control', required: true
   #products-table.row
     table.table.table-striped
       thead
@@ -30,15 +20,16 @@
       tbody
         -@products.each do |product|
           tr
-            td = product.name
-            td = t(product.product_type)
-            td = image_tag product.product_images[0].image.url(:thumb)
+            td = product.look.name
+            td = t(product.look.product_type)
+            td
+              -if product.look.product_images[0]
+                = image_tag product.look.product_images[0].image.url(:thumb)
             td = t(product.b_size)
             td = t(product.b_material)
             td = product.quantity
             td = product.price
-            td = product.description
+            td = product.look.description
             td = link_to "<span class = 'glyphicon glyphicon-eye-open' ></span>".html_safe, product
             td = link_to "<span class = 'glyphicon glyphicon-pencil' ></span>".html_safe, edit_product_path(product)
             td = link_to "<span class = 'glyphicon glyphicon-trash' ></span>".html_safe, product, data: { confirm: 'Are you sure?' }, method: :delete
-

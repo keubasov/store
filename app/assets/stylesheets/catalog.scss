@@ -1,0 +1,32 @@
+h2{
+  margin-left: 15%;
+}
+li{
+  list-style-type: none;
+  .product_item{
+    #catalog_image{
+      margin-top: 10px;
+      img{
+
+        border-radius: 10px;
+      }
+    }
+    #catalog_name{
+      color: #555;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 23px;
+      letter-spacing: 0.075em;
+      margin-top: 20px;
+      text-align: center;
+      text-transform: capitalize;
+      width: 200px;
+    }
+    #catalog_price{
+      background: #eee;
+      border-radius: 5px;
+      color: #aaa;
+      padding: 10px;
+    }
+  }
+}

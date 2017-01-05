@@ -12,3 +12,14 @@ ru:
   two:                  Двухспальное
   two_euro:             Евро Двушка
   unbleached_calico:    Бязь
+
+
+
+  number:
+   currency:
+      format:
+        unit: 'руб'
+        delimiter: ''
+        separator: '.'
+        precision: 0
+        format: '%n%u'

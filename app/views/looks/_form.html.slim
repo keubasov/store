@@ -1,0 +1,37 @@
+= form_for @look, html: {class: 'form-horifontal', multipart: true, role: 'form'} do |f|
+  - if @look.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@look.errors.count, "error")} prohibited this look from being saved:"
+      ul
+        - @look.errors.full_messages.each do |message|
+          li = message
+  .form-group.row
+    = f.label :name, 'Наименование:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.text_field :name, class: 'form-control', required: true
+
+  .form-group.row
+    = label_tag 'product_images[]', 'Изображение:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-2
+      label.btn.btn-default
+        = file_field_tag 'product_images[]', multiple: true, accept: 'image/png,image/gif,image/jpeg'
+        |Загрузить..
+    #images.col-sm-5
+      - if controller_name == 'update'
+        - @look.product_images.each do|p_i|
+          = image_tag p_i.image.url(:medium)
+
+  .form-group.row
+    = f.label :product_type, 'Вид товара:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.select :product_type, Look.product_types_for_select,{include_blank: false},  class: 'form-control'
+
+  .form-group.row
+    = f.label :description, 'Описание:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.text_area :description, class: 'form-control'
+
+  .form-group.row
+    .col-sm-2.col-sm-offset-6
+       = f.submit 'Сохранить', class: 'btn btn-default'
+

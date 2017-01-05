@@ -1,14 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
 logo:
-  product: bedcl
-  image_file_name: avatar92.jpg
-  image_content_type: image/jpeg
-  image_file_size: 3135
-  image_updated_at: <%= Date.new(2016-12-30) %>
+  look: bedcl_look
 
 

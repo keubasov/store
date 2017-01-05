@@ -83,14 +83,43 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: looks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE looks (
+    id integer NOT NULL,
+    name character varying,
+    description text,
+    product_type product_types DEFAULT 'bedclothe'::product_types NOT NULL
+);
+
+
+--
+-- Name: looks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE looks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: looks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE looks_id_seq OWNED BY looks.id;
+
+
+--
 -- Name: product_images; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE product_images (
     id integer NOT NULL,
-    product_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    look_id integer,
     image_file_name character varying,
     image_content_type character varying,
     image_file_size integer,
@@ -125,11 +154,9 @@ CREATE TABLE products (
     id integer NOT NULL,
     quantity integer DEFAULT 1 NOT NULL,
     price money NOT NULL,
-    name character varying NOT NULL,
-    description text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    product_type product_types DEFAULT 'bedclothe'::product_types NOT NULL,
+    look_id integer,
     b_size bedclothes_size,
     b_material bedclothes_material
 );
@@ -167,6 +194,13 @@ CREATE TABLE schema_migrations (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY looks ALTER COLUMN id SET DEFAULT nextval('looks_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY product_images ALTER COLUMN id SET DEFAULT nextval('product_images_id_seq'::regclass);
 
 
@@ -183,6 +217,14 @@ ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq':
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: looks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY looks
+    ADD CONSTRAINT looks_pkey PRIMARY KEY (id);
 
 
 --
@@ -210,10 +252,33 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: index_product_images_on_product_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_product_images_on_look_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_images_on_product_id ON product_images USING btree (product_id);
+CREATE INDEX index_product_images_on_look_id ON product_images USING btree (look_id);
+
+
+--
+-- Name: index_products_on_look_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_products_on_look_id ON products USING btree (look_id);
+
+
+--
+-- Name: fk_rails_53ec856160; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY products
+    ADD CONSTRAINT fk_rails_53ec856160 FOREIGN KEY (look_id) REFERENCES looks(id);
+
+
+--
+-- Name: fk_rails_c7ebd19dd5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY product_images
+    ADD CONSTRAINT fk_rails_c7ebd19dd5 FOREIGN KEY (look_id) REFERENCES looks(id);
 
 
 --
@@ -223,8 +288,9 @@ CREATE INDEX index_product_images_on_product_id ON product_images USING btree (p
 SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES
-('20161222181801'),
-('20161229020434'),
-('20161229041215');
+('20170104050338'),
+('20170104050438'),
+('20170104050509'),
+('20170104050710');
 
 

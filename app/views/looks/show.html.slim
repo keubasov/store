@@ -1,0 +1,30 @@
+p#notice = notice
+
+
+ul.list-group
+  li.list-group-item
+    strong Название
+    span.pull-right
+      b
+        = @look.name
+  li.list-group-item
+    strong Вид
+    span.pull-right
+      b
+        = t(@look.product_type)
+  li.list-group-item#list_image
+    strong Изображения
+    .pull-right
+      -@look.product_images.each do|p_i|
+        = image_tag p_i.image.url(:medium)
+    .clearboth
+
+  li.list-group-item
+    strong Описание
+    span.pull-right
+      b
+        = @look.description
+
+= link_to 'Изменить', edit_look_path(@look), class: 'bot_links'
+br
+= link_to 'Список видов товаров', looks_path, class: 'bot_links'

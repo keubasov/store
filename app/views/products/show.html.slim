@@ -6,7 +6,7 @@ ul.list-group
     strong Название
     span.pull-right
       b
-        = @product.name
+        = @product.product_name.name
   li.list-group-item
     strong Вид
     span.pull-right
@@ -15,7 +15,7 @@ ul.list-group
   li.list-group-item#list_image
     strong Изображения
     .pull-right
-      -@product.product_images.each do|p_i|
+      -@product.product_name.product_images.each do|p_i|
         = image_tag p_i.image.url(:medium)
     .clearboth
   li.list-group-item
@@ -42,7 +42,7 @@ ul.list-group
     strong Описание
     span.pull-right
       b
-        = @product.description
+        = @product.product_name.description
 
 = link_to 'Изменить', edit_product_path(@product), class: 'bot_links'
 br
