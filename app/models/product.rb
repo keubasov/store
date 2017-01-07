@@ -15,7 +15,7 @@ class Product < ApplicationRecord
     # bc.validates :b_material, presenсe: true
   end
   validates :b_size, inclusion: {in: %w(one_half two two_euro euro family)}
-  validates :b_material, inclusion: {in: %w(unbleached_calico poplin sateen)}
+
 
 
   # enum product_types: {
@@ -43,9 +43,6 @@ class Product < ApplicationRecord
 ### Get arrays from enum types     ####
 #######################################
 
-  def self.b_materials_for_select
-    enum_for_select 'bedclothes_material'
-  end
   def self.b_sizes_for_select
     enum_for_select 'bedclothes_size'
   end

@@ -26,6 +26,11 @@
     .col-sm-3
       = f.select :product_type, Look.product_types_for_select,{include_blank: false},  class: 'form-control'
 
+  .form-group.row#b_material
+    = f.label :b_material, 'Материал:', class: 'col-sm-2 col-sm-offset-2 control-label'
+    .col-sm-3
+      = f.select :b_material, Look.b_materials_for_select, {include_blank: false}, class: 'form-control'
+
   .form-group.row
     = f.label :description, 'Описание:', class: 'col-sm-2 col-sm-offset-2 control-label'
     .col-sm-3

@@ -2,5 +2,4 @@ bedcl:
   price: 9.99
   quantity: 1
   b_size: two
-  b_material: poplin
   look: bedcl_look

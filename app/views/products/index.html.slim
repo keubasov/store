@@ -1,7 +1,15 @@
-  =form_tag('/search', method: :get, remote: true, class: 'input-group', id:'search_form') do
-    span.input-group-btn
-      =submit_tag 'Найти', class: 'btn btn-default'
-    =text_field_tag 'search', nil, placeholder: 'Поиск', class: 'form-control', required: true
+#main-content
+  .content-header.row
+    .col-sm-8
+      h1 Товары
+    .col-sm-4
+      = link_to 'Новый товар', new_look_path, class: 'btn btn-default offset'
+  #search-panel.row
+    .col-sm-4.col-sm-offset-4
+      =form_tag('/search', method: :get, remote: true, class: 'input-group', id:'search_form') do
+        span.input-group-btn
+          =submit_tag 'Найти', class: 'btn btn-default'
+        =text_field_tag 'search', nil, placeholder: 'Поиск', class: 'form-control', required: true
   #products-table.row
     table.table.table-striped
       thead
@@ -10,7 +18,6 @@
           th Вид
           th Изобр
           th Размер
-          th Мат-л
           th Кол-во
           th Цена
           th Описание
@@ -26,7 +33,6 @@
               -if product.look.product_images[0]
                 = image_tag product.look.product_images[0].image.url(:thumb)
             td = t(product.b_size)
-            td = t(product.b_material)
             td = product.quantity
             td = product.price
             td = product.look.description

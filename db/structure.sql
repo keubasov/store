@@ -90,7 +90,8 @@ CREATE TABLE looks (
     id integer NOT NULL,
     name character varying,
     description text,
-    product_type product_types DEFAULT 'bedclothe'::product_types NOT NULL
+    product_type product_types DEFAULT 'bedclothe'::product_types NOT NULL,
+    b_material bedclothes_material
 );
 
 
@@ -157,8 +158,7 @@ CREATE TABLE products (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     look_id integer,
-    b_size bedclothes_size,
-    b_material bedclothes_material
+    b_size bedclothes_size
 );
 
 
@@ -270,7 +270,7 @@ CREATE INDEX index_products_on_look_id ON products USING btree (look_id);
 --
 
 ALTER TABLE ONLY products
-    ADD CONSTRAINT fk_rails_53ec856160 FOREIGN KEY (look_id) REFERENCES looks(id);
+    ADD CONSTRAINT fk_rails_53ec856160 FOREIGN KEY (look_id) REFERENCES looks(id) ON DELETE CASCADE;
 
 
 --
@@ -278,7 +278,7 @@ ALTER TABLE ONLY products
 --
 
 ALTER TABLE ONLY product_images
-    ADD CONSTRAINT fk_rails_c7ebd19dd5 FOREIGN KEY (look_id) REFERENCES looks(id);
+    ADD CONSTRAINT fk_rails_c7ebd19dd5 FOREIGN KEY (look_id) REFERENCES looks(id) ON DELETE CASCADE;
 
 
 --

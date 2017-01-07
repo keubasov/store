@@ -7,9 +7,7 @@ class ProductImage < ApplicationRecord
 
   def delete_with_file
     begin
-      byebug
-      FileUtils.remove_dir( File.expand_path('..',File.dirname(image.path))
-)
+      FileUtils.remove_dir( File.expand_path('..',File.dirname(image.path)))
       delete
     rescue
       logger.debug 'Не удалось удалить изображение'
