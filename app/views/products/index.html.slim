@@ -3,7 +3,7 @@
     .col-sm-8
       h1 Товары
     .col-sm-4
-      = link_to 'Новый товар', new_look_path, class: 'btn btn-default offset'
+      = link_to 'Приход товара', new_product_path, class: 'btn btn-default offset'
   #search-panel.row
     .col-sm-4.col-sm-offset-4
       =form_tag('/search', method: :get, remote: true, class: 'input-group', id:'search_form') do

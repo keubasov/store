@@ -3,8 +3,8 @@ html
   head
     title Store
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track'=> 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track'=> 'reload'
   body
     #page
       .header-container.hidden-xs.hidden-sm
@@ -16,11 +16,11 @@ html
               .col-sm-4
                 ul#main_menu.nav.nav-pills
                   li.active
-                    =link_to 'Каталог', '#', 'data-toggle'=> 'pill'
+                    =link_to 'Каталог', catalog_index_url
                   li
-                    =link_to 'Доставка', '#', 'data-toggle'=> 'pill'
+                    =link_to 'Доставка', '#'
                   li
-                    =link_to 'О нас', '#', 'data-toggle'=> 'pill'
+                    =link_to 'О нас', '#'
               .col-sm-4
                 #cart_block_wrapper
                   #cart_block
@@ -38,13 +38,13 @@ html
             nav#categories_block_top
               ul.nav.nav-tabs
                 li#child.active
-                  =link_to 'Детское', '#', 'data-toggle'=> 'tab'
+                  =link_to 'Детское',action: 'index', remote: true
                 li#unbleached_calico
-                  =link_to 'Бязь', '#', 'data-toggle'=> 'tab'
+                  =link_to 'Бязь', action: 'index', b_material: 'unbleached_calico', remote: true
                 li#poplin
-                  =link_to 'Поплин', '#', 'data-toggle'=> 'tab'
+                  =link_to 'Поплин', action: 'index', b_material: 'poplin', remote: true
                 li#satin
-                  =link_to 'Сатин', '#', 'data-toggle'=> 'tab'
+                  =link_to 'Сатин', action: 'index', b_material: 'sateen', remote: true
       #mobile_nav.hidden-md.hidden-lg
 
       .columns-container

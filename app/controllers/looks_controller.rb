@@ -4,7 +4,11 @@ class LooksController < ApplicationController
   # GET /looks
   # GET /looks.json
   def index
-    @looks = Look.all
+    @looks = Look.where(find_params).order(:name)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /looks/1
@@ -28,6 +32,11 @@ class LooksController < ApplicationController
 
     respond_to do |format|
       if @look.save
+        if params[:product_images]
+          params[:product_images].each do |image|
+            @look.product_images.create(image: image)
+          end
+        end
         format.html { redirect_to @look, notice: 'Look was successfully created.' }
         format.json { render :show, status: :created, location: @look }
       else
@@ -42,6 +51,12 @@ class LooksController < ApplicationController
   def update
     respond_to do |format|
       if @look.update(look_params)
+        if params[:product_images]
+          @look.product_images.each {|i| i.delete_with_file}
+          params[:product_images].each do |image|
+            @look.product_images.create(image: image)
+          end
+        end
         format.html { redirect_to @look, notice: 'Look was successfully updated.' }
         format.json { render :show, status: :ok, location: @look }
       else
@@ -65,10 +80,13 @@ class LooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_look
       @look = Look.find(params[:id])
+      @products = @look.products
+      @images = @look.product_images
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def look_params
       params.require(:look).permit(:name, :product_type, :description, :b_material)
     end
+
 end

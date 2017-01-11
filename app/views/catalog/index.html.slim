@@ -1,18 +1,4 @@
 h2 Детское постельное
 ul.product_list.row.grid
-  -@products.each do |product|
-    li.col-xs-6.col-sm-4.col-md-3
-      .product_item
-        #catalog_name.pull-right
-          =product.name
-        .clearboth
-        #catalog_image.pull-right
-          = image_tag product.product_images[0].image.url(:medium)
-        .clearboth
-        #catalog_price.pull-right
-          =number_to_currency(product.price)
-        .clearboth
-        #catalog_sizes.hidden-xs
-          ul
+  =render partial: 'look', locals: {looks: @looks}
 
-.clearboth

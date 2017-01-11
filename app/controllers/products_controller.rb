@@ -27,11 +27,6 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     respond_to do |format|
       if @product.save
-        if params[:product_images]
-          params[:product_images].each do |image|
-            @product.product_images.create(image: image)
-          end
-        end
         format.html { redirect_to @product, notice: 'Товар успешно добавлен.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -46,12 +41,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        if params[:product_images]
-          @product.product_images.each {|i| i.delete_with_file}
-          params[:product_images].each do |image|
-            @product.product_images.create(image: image)
-          end
-        end
+
         format.html { redirect_to @product, notice: 'Товар упешно обновлен.' }
         format.json { render :show, status: :ok, location: @product }
       else

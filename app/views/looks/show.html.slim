@@ -12,19 +12,30 @@ ul.list-group
     span.pull-right
       b
         = t(@look.product_type)
-  li.list-group-item#list_image
+  li.list-group-item#list_image.clearfix
     strong Изображения
     .pull-right
       -@look.product_images.each do|p_i|
         = image_tag p_i.image.url(:medium)
-    .clearboth
+
 
   li.list-group-item
     strong Описание
     span.pull-right
       b
         = @look.description
+  table.table#show_products
+    thead
+      th Размер
+      th Цена
+      th Количество
+    tbody
+      - @products.each do |product|
+        tr
+          td = t(product.b_size) if product.b_size.present?
+          td = product.price
+          td = product.quantity
 
 = link_to 'Изменить', edit_look_path(@look), class: 'bot_links'
 br
-= link_to 'Список видов товаров', looks_path, class: 'bot_links'
+= link_to 'Список товаров', looks_path, class: 'bot_links'

@@ -1,7 +1,10 @@
 class CatalogController < ApplicationController
 
   def index
-    @products = Product.order(:name)
-    @product_names = Product.names
+    @looks = Look.where(find_params).order(:name)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 end

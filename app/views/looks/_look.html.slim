@@ -1,0 +1,35 @@
+table.table
+  thead
+    tr
+      th Наимен
+      th Вид
+      th Изобр
+      th Мат-л
+      th Описание
+      th
+      th
+      th
+  tbody
+    - @looks.each do |look|
+      tr.kind
+        td.name_td = look.name.mb_chars.capitalize
+        td = t(look.product_type)
+        td
+          - if look.product_images[0]
+            = image_tag look.product_images[0].image.url(:thumb)
+        td = t(look.b_material) if look.b_material.present?
+        td = look.description
+        td = link_to "<span class = 'glyphicon glyphicon-eye-open' ></span>".html_safe, look
+        td = link_to "<span class = 'glyphicon glyphicon-pencil' ></span>".html_safe, edit_look_path(look)
+        td = link_to "<span class = 'glyphicon glyphicon-trash' ></span>".html_safe, look, data: {confirm: 'Are you sure?'}, method: :delete
+      tr
+        td Размер
+        td Цена
+        td[colspan="2"] Количество
+        td[colspan="4"]
+        -look.products.each do|product|
+          tr
+            td = t(product.b_size) if product.b_size.present?
+            td = product.price
+            td[colspan="2"] = product.quantity
+            td[colspan="4"]

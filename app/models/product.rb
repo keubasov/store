@@ -46,12 +46,7 @@ class Product < ApplicationRecord
   def self.b_sizes_for_select
     enum_for_select 'bedclothes_size'
   end
-#######################################
-###  Get array of uniq names       ####
-#######################################
-def self.names
-  Product.all.pluck(:name).uniq
-end
+
 #######################################
 ###           private              ####
 #######################################
