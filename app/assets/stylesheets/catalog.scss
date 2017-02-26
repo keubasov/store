@@ -1,3 +1,4 @@
+//------------------index---------------
 h2{
   margin-left: 15%;
 }
@@ -7,9 +8,9 @@ ul.product_list{
     height: 380px;
     .product_item{
       #catalog_image{
-        margin-top: 10px;
-        img{
-          border-radius: 10px;
+        margin-top: 20px;
+        &:hover{
+          margin-top: 10px;
         }
       }
       #catalog_name{
@@ -33,3 +34,15 @@ ul.product_list{
   }
 }
 
+//------------------------show------------------
+#center_column{
+  margin: 0 auto;
+  width: 500px;
+  #name{
+    font-size: 25px;
+  }
+  #description{
+    font-size: 14px;
+    line-height: 19px;
+  }
+}

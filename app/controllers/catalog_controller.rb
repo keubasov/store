@@ -7,4 +7,8 @@ class CatalogController < ApplicationController
       format.html
     end
   end
+
+  def show
+    @look = Look.find(params[:id])
+  end
 end

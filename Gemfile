@@ -58,3 +58,9 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'paperclip', "~> 5.0.0"
 gem 'rmagick', "~> 2.16.0"
 gem 'jquery-ui-rails', "~> 6.0.1"
+group :development, :test do
+  gem 'capybara', '2.12.1'
+  gem 'capybara-webkit', '1.12.0'
+  gem 'rspec-rails', '3.5.0'
+  gem 'factory_girl_rails', '4.8.0'
+end
