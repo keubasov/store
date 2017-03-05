@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :products
-  root 'products#index'
+  root 'catalog#index'
   resources :looks
   resources :catalog, only: [:index, :show]
 end
