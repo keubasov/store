@@ -1,6 +1,13 @@
 FactoryGirl.define do
-  factory :poplin_bedclothe_image, class: :product_image do
-    look  :poplin_bedclothe
-    image_file_name
+
+  factory :product_image do
+    trait :amaretto do
+      image_file_name "#{Rails.root}/spec/factories/images/Amaretto.jpg"
+    end
+
+    trait :norway do
+      image_file_name "#{Rails.root}/spec/factories/images/Norway_story.jpg"
+    end
+
   end
 end

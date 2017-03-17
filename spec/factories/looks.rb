@@ -1,9 +1,20 @@
 FactoryGirl.define do
   factory  :look do
     name  'look'
+    product_type  'bedclothe'
+    b_material   'unbleached_calico'
+    childs :false
 
     trait :bedclothe do
       product_type  'bedclothe'
+    end
+
+    trait :childs do
+      childs true
+    end
+
+    trait :adults do
+      childs false
     end
 
     trait :poplin do

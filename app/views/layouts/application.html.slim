@@ -37,14 +37,14 @@ html
                     #cart_block_list
             nav#categories_block_top
               ul.nav.nav-tabs
-                li#child.active
-                  =link_to 'Детское',action: 'index', remote: true
-                li#unbleached_calico
-                  =link_to 'Бязь', action: 'index', b_material: 'unbleached_calico', remote: true
+                li#unbleached_calico.active
+                  =link_to 'Бязь', action: 'index', b_material: 'unbleached_calico',  remote: true
+                li#child
+                  =link_to 'Детское',action: 'index', childs: true, b_material: 'unbleached_calico', remote: true
                 li#poplin
-                  =link_to 'Поплин', action: 'index', b_material: 'poplin', remote: true
+                  =link_to 'Поплин', action: 'index',  b_material: 'poplin', remote: true
                 li#satin
-                  =link_to 'Сатин', action: 'index', b_material: 'sateen', remote: true
+                  =link_to 'Сатин', action: 'index',  b_material: 'sateen', remote: true
       #mobile_nav.hidden-md.hidden-lg
       #space.clearfix
       .columns-container

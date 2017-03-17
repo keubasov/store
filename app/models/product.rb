@@ -1,44 +1,17 @@
 class Product < ApplicationRecord
+
   belongs_to :look
+  has_many :line_items
 
-  validates :quantity,
-     # presenсe: true,
+  validates_presence_of :price, :quantity
 
-            numericality: {only_integer: true, greater_than_or_equal_to: 0}
-  validates :price,
-  # presenсe: true,
-   numericality: {greater_than_or_equal_to: 0}
-
+  validates :quantity, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :price, numericality: {greater_than_or_equal_to: 0}
 
   with_options if: "look.product_type == 'bedclothe'" do |bc|
-    # bc.validates :b_size, presenсe: true
-    # bc.validates :b_material, presenсe: true
+    bc.validates_presence_of :b_size
   end
-  validates :b_size, inclusion: {in: %w(one_half two two_euro euro family)}
 
-
-
-  # enum product_types: {
-  #   bedclothe:    'bedclothe',
-  #   blanket:      'blanket',
-  #   pillow:       'pillow',
-  #   towel:        'towel',
-  #   matress:      'matress'
-  # }
-
-  # enum bedclothes_size:{
-  #   one_half:     'one_half',
-  #   two:          'two',
-  #   two_euro:     'two_euro',
-  #   euro:         'euro',
-  #   family:       'family'
-  # }
-
-  # enum bedclothes_material:{
-  #   unbleached_calico:  'unbleached_calico',
-  #   poplin:             'poplin',
-  #   sateen:             'sateen'
-  # }
 #######################################
 ### Get arrays from enum types     ####
 #######################################

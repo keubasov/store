@@ -1,16 +1,17 @@
 -looks.each do |look|
   li.col-xs-6.col-sm-4.col-md-3
-    .product_item
-      #catalog_name.clearfix
-        =look.name
-      #catalog_image.clearfix
-        = image_tag look.product_images[0].image.url(:medium), class: 'center-block'
-      #catalog_price.clearfix.center-block
-        -look.products.each do |product|
-          -if product.b_size.present?
-            .pull-left
-              = t(product.b_size)
-          .pull-right
-            = number_to_currency product.price
+    =link_to catalog_path(look.id), class: 'product_link'
+      .product_item
+        #catalog_name.clearfix
+          =look.name
+        #catalog_image.clearfix
+          = image_tag look.product_images[0].image.url(:medium), class: 'center-block'
+        #catalog_price.clearfix.center-block
+          -look.products.each do |product|
+            -if product.b_size.present?
+              .pull-left
+                = t(product.b_size)
+            .pull-right
+              = number_to_currency product.price
+            .clearfix
 
-          .clearfix

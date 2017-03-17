@@ -1,7 +1,9 @@
 FactoryGirl.define do
   factory :product do
     quantity 1
-    price 9.99
+    price 100
+    b_size :one_half
+    look
     # trait :poplin do
     #   look :look, :bedclothe, :poplin
     # end
@@ -37,5 +39,19 @@ FactoryGirl.define do
     trait :family do
       b_size :family
     end
+
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+

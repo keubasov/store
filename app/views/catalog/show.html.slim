@@ -16,20 +16,20 @@
             span.glyphicon.glyphicon-chevron-right
   #name.row
     .col-xs-12.col-sm-12
-      =@look.description
+      =@look.name
   -if @look.product_type == 'bedclothe'
     #material.row
       .col-xs-12.col-sm-12
         =t @look.b_material
   #description.row
     .col-xs-12.col-sm-12
-      =@look.name
+      =@look.description
 
   -@look.products.each do |product|
-    .row
+    .row.buy
       .col-xs-6.col-sm-6
         -if @look.product_type == 'bedclothe'
-          =product.b_size
+          = t product.b_size
         -else
           | цена
       .col-xs-6.col-sm-6

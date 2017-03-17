@@ -1,29 +1,35 @@
 require 'rmagick'
 include Magick
 
-
 Look.delete_all
 Product.delete_all
 ProductImage.delete_all
-images_path = "#{Rails.root}/public/system/product_images/images/000/000"
-FileUtils.rm_rf(images_path)
+FileUtils.rm_rf( "#{Rails.root}/public/system/product_images/images/000/000")
 addr = 'http://www.art-dtex.ru/catalog_bedding_textile.aspx?cat='
-links = [7, 8, 19].map{|p|[addr+ p.to_s, p]}
+links = [6, 7, 8, 19].map{|p|[addr+ p.to_s, p]}
 links.each do |link, page_num|
   page = Nokogiri::HTML(open(link))
   case page_num
+    when 6
+      b_size = 'one_half'
+      b_material = 'unbleached_calico'
+      childs = true
     when 7
       b_size = 'one_half'
       b_material = 'unbleached_calico'
+      childs = false
     when 8
       b_size = 'two'
       b_material = 'unbleached_calico'
+      childs = false
     when 19
       b_size = 'one_half'
       b_material = 'poplin'
+      childs = false
     else
       b_size = 'one_half'
       b_material = 'unbleached_calico'
+      childs = false
   end
   img_links = page.css('div.foto a')
   img_links.each do |img_link|
@@ -34,39 +40,20 @@ links.each do |link, page_num|
             name: name,
             description: name,
             product_type: 'bedclothe',
-            b_material: b_material)
+            b_material: b_material,
+            childs: childs)
 
       #-------------------Адрес, откуда будем качать картинку------------
       img_src = "http://www.art-dtex.ru/#{img_link.css('img').last['src']}"
-
       #-------------Расширение файла-------------
       f_extension = img_src.split('.').last
-      p_image_id = look.product_images.create(image_file_name: "#{name}.#{f_extension}").id
-      img_root_path = "#{images_path}/#{sprintf("%3.3d",p_image_id)}/"
-
-      img = Image.read(img_src).first
-      [['original', 0], ['medium', 200.0], ['thumb',50.0]].each do |dir, new_height|
-        #-----------создаем папки для изображений-------------
-        FileUtils.makedirs "#{img_root_path}#{dir}"
-
-        #----------Объект, содержащий изображение---------
-        unless new_height == 0
-
-        #-------------Масштабируем изображения-------
-          height, width = img.rows, img.columns
-          new_width = width*new_height.to_f/height
-          img.resize_to_fit!(new_width, new_height)
-        end
-        #---------------  Сохраняем Image в файл  ------------
-        img.write("#{img_root_path}#{dir}/#{name}.#{f_extension}")
-        #----------Заполняем поля для ProductImage---------
-        look.product_images.first.update(
-            image_content_type: "image/#{img.format}",
-            image_file_size: img.filesize,
-            image_updated_at: DateTime.now)
-      end
-      img.destroy!
-
+      #-------------Временный файл ---------------
+      dest = "#{Rails.root}/public/system/#{name}.#{f_extension}"
+      IO.copy_stream(open(img_src), dest)
+      #--------------Создаем ProductImage--------------
+      look.product_images.create(image: File.new(dest))
+      #--------------Удаляем временную картинку--------------
+      FileUtils.rm_rf(dest)
 
       #создаем товар
       look.products.create(quantity: 1, price: 100, b_size: b_size)
