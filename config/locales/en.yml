@@ -21,3 +21,4 @@
 
 en:
   hello: "Hello world"
+  line_item_created:  Line item was successfully created.

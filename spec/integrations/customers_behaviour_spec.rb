@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'users behaviors' do
+feature 'users behaviors', js: true do
   before do
     DatabaseCleaner.strategy = :deletion
     DatabaseCleaner.clean
@@ -11,11 +11,16 @@ feature 'users behaviors' do
 
   scenario 'user buys a product' do
     visit root_path
-    expect(page).to have_css('div#catalog_name', text: 'Бязь')
-    find('a.product_link').click
-    expect(page).to have_css('div.carousel-inner')
-    expect(page).to have_css('.row.buy')
-    find('.row.buy').click
-
+    # Пользователь добавляет товар в корзину два раза
+    expect(page).to have_css('span.cart_quantity', text: '0')
+    click_link("#{I18n.t @byaz_product.b_size}#{@byaz_product.price} руб.")
+    expect(page).to have_css('span.cart_quantity', text: '1')
+    click_link("#{I18n.t @byaz_product.b_size}#{@byaz_product.price} руб.")
+    expect(page).to have_css('span.cart_quantity', text: '2')
+    # Пользователь заходит в корзину и видит 2 товара
+    click_link('моей корзине')
+    expect(page).to have_content(I18n.t @byaz_product.b_size)
+    expect(page).to have_css('td', text: '2')
+    expect(page).to have_css('button', text: 'Заказать')
   end
 end

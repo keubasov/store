@@ -24,11 +24,11 @@ html
               .col-sm-4
                 #cart_block_wrapper
                   #cart_block
-
                     #cart_block_summary.collapsed
-                      span.ajax_cart_quantity 0
-                      span.ajax_cart_product_txt товаров в
-                      =<link_to 'моей корзине', root_path, class: 'my_cart'
+                      span.cart_quantity
+                        = @cart.line_items.sum(&:quantity)
+                      span.cart_product_txt товаров в
+                      =<link_to 'моей корзине', edit_cart_path(@cart.id), class: 'my_cart'
                       #free_delivery
                         span.delivery Бесплатная доставка от
                           <span class="delivery_from"> 4000 </span>

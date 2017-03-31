@@ -25,11 +25,11 @@ feature 'catalog/index', type: :view do
   scenario 'when visit  root path' do
     expect(page).to have_css('h2', text: 'Бязь')
     expect(page).to have_css('img.center-block')
-    expect(page).to have_css('div#catalog_name', text: 'Бязь')
-    expect(page).to_not have_css('div#catalog_name', text: 'Детское')
-    expect(page).to_not have_css('div#catalog_name', text: 'Сатин')
-    expect(page).to_not have_css('div#catalog_name', text: 'Поплин')
-    expect(page).to have_css('div#catalog_price', text: /.*#{@byaz_product.price}.*/)
+    expect(page).to have_css('div.catalog_name', text: 'Бязь')
+    expect(page).to_not have_css('div.catalog_name', text: 'Детское')
+    expect(page).to_not have_css('div.catalog_name', text: 'Сатин')
+    expect(page).to_not have_css('div.catalog_name', text: 'Поплин')
+    expect(page).to have_css('div.price', text: /.*#{@byaz_product.price}.*/)
     expect(page).to have_css('li#unbleached_calico.active')
   end
 
@@ -37,11 +37,11 @@ feature 'catalog/index', type: :view do
     click_link('Детское')
     expect(page).to have_css('h2', text: 'Детское')
     expect(page).to have_css('img.center-block')
-    expect(page).to_not have_css('div#catalog_name', text: 'Бязь')
-    expect(page).to have_css('div#catalog_name', text: 'Детское')
-    expect(page).to_not have_css('div#catalog_name', text: 'Сатин')
-    expect(page).to_not have_css('div#catalog_name', text: 'Поплин')
-    expect(page).to have_css('div#catalog_price', text: /.*#{@child_product.price}.*/)
+    expect(page).to_not have_css('div.catalog_name', text: 'Бязь')
+    expect(page).to have_css('div.catalog_name', text: 'Детское')
+    expect(page).to_not have_css('div.catalog_name', text: 'Сатин')
+    expect(page).to_not have_css('div.catalog_name', text: 'Поплин')
+    expect(page).to have_css('div.price', text: /.*#{@child_product.price}.*/)
     # expect(page).to have_css('li#child.active')
   end
 
@@ -49,11 +49,11 @@ feature 'catalog/index', type: :view do
     click_link('Поплин')
     expect(page).to have_css('h2', text: 'Поплин')
     expect(page).to have_css('img.center-block')
-    expect(page).to_not have_css('div#catalog_name', text: 'Бязь')
-    expect(page).to_not have_css('div#catalog_name', text: 'Детское')
-    expect(page).to_not have_css('div#catalog_name', text: 'Сатин')
-    expect(page).to have_css('div#catalog_name', text: 'Поплин')
-    expect(page).to have_css('div#catalog_price', text: /.*#{@poplin_product.price}.*/)
+    expect(page).to_not have_css('div.catalog_name', text: 'Бязь')
+    expect(page).to_not have_css('div.catalog_name', text: 'Детское')
+    expect(page).to_not have_css('div.catalog_name', text: 'Сатин')
+    expect(page).to have_css('div.catalog_name', text: 'Поплин')
+    expect(page).to have_css('div.price', text: /.*#{@poplin_product.price}.*/)
     # expect(page).to have_css('li#poplin.active')
   end
 
@@ -61,11 +61,11 @@ feature 'catalog/index', type: :view do
     click_link('Сатин')
     expect(page).to have_css('h2', text: 'Сатин')
     expect(page).to have_css('img.center-block')
-    expect(page).to_not have_css('div#catalog_name', text: 'Бязь')
-    expect(page).to_not have_css('div#catalog_name', text: 'Детское')
-    expect(page).to have_css('div#catalog_name', text: 'Сатин')
-    expect(page).to_not have_css('div#catalog_name', text: 'Поплин')
-    expect(page).to have_css('div#catalog_price', text: /.*#{@sateen_product.price}.*/)
+    expect(page).to_not have_css('div.catalog_name', text: 'Бязь')
+    expect(page).to_not have_css('div.catalog_name', text: 'Детское')
+    expect(page).to have_css('div.catalog_name', text: 'Сатин')
+    expect(page).to_not have_css('div.catalog_name', text: 'Поплин')
+    expect(page).to have_css('div.price', text: /.*#{@sateen_product.price}.*/)
     # expect(page).to have_css('li#sateen.active')
   end
 end

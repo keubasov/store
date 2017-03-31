@@ -1,0 +1,42 @@
+.cart_center
+  table.table.table-striped.table-hover
+    thead
+      th
+        =t 'product'
+      th
+        =t 'size'
+      th
+        =t 'price'
+      th
+        =t 'quantity'
+      th
+        =t 'total'
+    tbody
+      -@line_items.each do |line_item|
+        tr
+          td
+            =line_item.product.look.name
+          td
+            =t line_item.product.b_size || '-'
+          td
+            =line_item.product.price
+          td
+            =line_item.quantity
+          td
+            =line_item.product.price * line_item.quantity
+
+  = form_for @cart do |f|
+    - if @cart.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@cart.errors.count, "error")} prohibited this cart from being saved:"
+        ul
+          - @cart.errors.full_messages.each do |message|
+            li = message
+
+    .form-group.row
+      .col-sm-1
+        = f.label :phone, value: t(:phone)
+      .col-sm-3
+        = f.text_field :phone, class: 'form-control', required: true
+      .col-sm-3
+        = f.submit value: t(:order),  class: 'btn btn-default'

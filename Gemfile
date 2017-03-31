@@ -56,6 +56,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'paperclip', "~> 5.0.0"
 gem 'rmagick', "~> 2.16.0"
 gem 'jquery-ui-rails', "~> 6.0.1"
+gem 'rails-i18n', '~> 5.0.0'
 group :development, :test do
   gem 'capybara', '2.12.1'
   gem 'capybara-webkit', '1.12.0'
@@ -66,5 +67,5 @@ end
 
 group :test do
   gem 'database_cleaner', '1.5.3'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '3.1.1'
 end

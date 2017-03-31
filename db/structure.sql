@@ -89,7 +89,8 @@ CREATE TABLE ar_internal_metadata (
 CREATE TABLE carts (
     id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    phone character varying
 );
 
 
@@ -119,7 +120,6 @@ ALTER SEQUENCE carts_id_seq OWNED BY carts.id;
 CREATE TABLE line_items (
     id integer NOT NULL,
     quantity integer,
-    price money,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     cart_id integer,
@@ -396,7 +396,7 @@ ALTER TABLE ONLY product_images
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES
+INSERT INTO "schema_migrations" (version) VALUES
 ('20170104050338'),
 ('20170104050438'),
 ('20170104050509'),
@@ -405,6 +405,8 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170317061200'),
 ('20170317061336'),
 ('20170317082547'),
-('20170317083125');
+('20170317083125'),
+('20170331044049'),
+('20170331055826');
 
 

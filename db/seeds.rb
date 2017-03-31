@@ -4,7 +4,7 @@ include Magick
 Look.delete_all
 Product.delete_all
 ProductImage.delete_all
-FileUtils.rm_rf( "#{Rails.root}/public/system/product_images/images/000/000")
+FileUtils.rm_rf( "#{Rails.root}/public/system/product_images/images")
 addr = 'http://www.art-dtex.ru/catalog_bedding_textile.aspx?cat='
 links = [6, 7, 8, 19].map{|p|[addr+ p.to_s, p]}
 links.each do |link, page_num|
@@ -48,7 +48,7 @@ links.each do |link, page_num|
       #-------------Расширение файла-------------
       f_extension = img_src.split('.').last
       #-------------Временный файл ---------------
-      dest = "#{Rails.root}/public/system/#{name}.#{f_extension}"
+      dest = "#{Rails.root}/public/#{name}.#{f_extension}"
       IO.copy_stream(open(img_src), dest)
       #--------------Создаем ProductImage--------------
       look.product_images.create(image: File.new(dest))

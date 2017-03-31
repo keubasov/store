@@ -11,5 +11,6 @@ RSpec.describe CatalogController, type: :routing do
       expect(:get => "/catalog/1").to route_to("catalog#show", :id => "1")
     end
 
+
   end
 end
